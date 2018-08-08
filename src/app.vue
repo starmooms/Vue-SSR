@@ -21,6 +21,11 @@
                     <span>message</span>
                 </router-link>
             </li>
+            <li class="nav-item">
+                <router-link class="nav-link" to="/test">
+                    <span>test</span>
+                </router-link>
+            </li>
         </ul>
         <keep-alive>
             <router-view></router-view>
