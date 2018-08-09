@@ -10,6 +10,9 @@ export default {
         return {
             msg: 'this is message'
         }
+    },
+    metaInfo: {
+        title: 'message Title'
     }
 }
 </script>

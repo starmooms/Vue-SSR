@@ -10,6 +10,9 @@ export default {
         return {
             msg: 'this is index'
         }
+    },
+    metaInfo: {
+        title: 'index Title'
     }
 }
 </script>

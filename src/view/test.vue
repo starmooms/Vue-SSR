@@ -10,6 +10,9 @@ export default {
         return {
             msg: 'this is test'
         }
+    },
+    metaInfo: {
+        title: 'test'
     }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="app">
         <ul class="hd-nav">
             <li class="nav-item">
                 <router-link class="nav-link" to="/">
@@ -39,6 +39,16 @@ export default {
         return {
             a: '532'
         }
+    },
+    metaInfo: {
+        title: 'app -------- Title',
+        meta: [
+            { charset: 'utf-8' },
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1.0'
+            }
+        ]
     }
 }
 </script>

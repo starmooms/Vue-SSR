@@ -10,6 +10,9 @@ export default {
         return {
             msg: 'this is product'
         }
+    },
+    metaInfo: {
+        title: 'products'
     }
 }
 </script>
