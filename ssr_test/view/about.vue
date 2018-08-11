@@ -8,7 +8,7 @@
 <script>
 export default {
     asyncData({ store, route }) {
-        return store.dispatch('getString', route.params.id)
+        return store.dispatch('getString', route)
     },
     computed: {
         str() {

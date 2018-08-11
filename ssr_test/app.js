@@ -10,7 +10,7 @@ export function createApp(context) {
   const router = createRouter(context)
   const store = createStore(context)
 
-  // 同步路由状态route 到 store  //vuex-router-sync
+  // 同步路由状态     将 route 写入到store的state  //vuex-router-sync
   sync(store, router)
 
   const app = new Vue({

@@ -12,22 +12,22 @@ const renderer = vueServerRender.createBundleRenderer(bundle, {
     clientManifest
 })
 
-// const createApp = require('./server/')
 
-//设置静态文件
-const serve = (path, cache) => express.static('./dist', {
+//设置静态文件目录
+const serve = (path, cache) => express.static(path, {
     maxAge: cache && 1000 * 60 * 60 * 24 * 30
 })
-server.use('/dist', serve('./dist', true))
-
+server.use('/', serve('./dist', true))
 
 // api
-server.get('/api/getString', (req, res) => {
+const apiRouter = express.Router()
+apiRouter.get('/getString', (req, res) => {
+    pathString = req.query.pathString ? req.query.pathString : 'no get pathString'
     res.send({
-        str: 'nowString is about'
+        str: `last path is ${pathString}`
     })
 })
-
+server.use('/api', apiRouter)
 
 
 server.get('*', (req, res) => {

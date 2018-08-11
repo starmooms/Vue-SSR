@@ -3,7 +3,6 @@ import { createApp } from './app'
 const { app, router, store } = createApp();
 
 //客户端，在挂载到应用程序之前，store 就应该获取到状态   服务端的context.state将作为客户端window.__INITIAL_STATE__
-console.log(window.__INITIAL_STATE__)
 if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__)
 }
@@ -15,7 +14,6 @@ router.onReady(() => {
     // 在初始路由 resolve 后执行，
     // 以便我们不会二次预取(double-fetch)已有的数据。
     // 使用 `router.beforeResolve()`，以便确保所有异步组件都 resolve。
-    console.log('dddsss--------------------------------')
     router.beforeResolve((to, from, next) => {
         const matched = router.getMatchedComponents(to)
         const prevMatched = router.getMatchedComponents(from)

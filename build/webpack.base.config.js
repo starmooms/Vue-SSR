@@ -6,7 +6,7 @@ const dev = process.env.NODE_ENV === 'development'
 
 
 const mode = dev ? "development" : "production";
-const publicPath = dev ? "/" : "/dist/";
+const publicPath = dev ? "/" : "/";
 const root = path.resolve(__dirname, '../')
 
 const config = {
