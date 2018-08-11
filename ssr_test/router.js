@@ -36,8 +36,3 @@ export function createRouter() {
         ]
     })
 }
-
-
-
-
-export default createRouter

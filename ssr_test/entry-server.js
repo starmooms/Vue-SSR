@@ -14,26 +14,27 @@ export default context => {
         router.push(context.url)
 
         router.onReady(() => {
-            //获取router页面的vue组件
+            // 获取router页面的vue组件
             const matchedComponents = router.getMatchedComponents()
             if (!matchedComponents.length) {
                 return reject({ code: 404 })
             }
-            resolve(app)
 
-            // Promise.all(matchedComponents.map(Component => {
-            //     //如果组件存在asyncData函数
-            //     if (Component.asyncData) {
-            //         return Component.asyncData({
-            //             store,
-            //             route: router.currentRoute
-            //         })
-            //     }
-            // })).then(() => {
+            Promise.all(matchedComponents.map(Component => {
+                //如果组件存在asyncData函数
+                if (Component.asyncData) {
+                    return Component.asyncData({
+                        store,
+                        route: router.currentRoute
+                    })
+                }
+            })).then(() => {
+                console.log('服务端数据预取-------')
+                context.state = store.state
+                resolve(app)
 
-            //     context.state = store.state
-            //     resolve(app)
-            // }).catch(reject)
+            }).catch(reject)
+
 
         }, reject)
     })

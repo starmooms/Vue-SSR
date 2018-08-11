@@ -5,43 +5,24 @@ const dev = process.env.NODE_ENV === 'development'
 
 
 
-
-// console.log(argv.mode + "!!!!");
-
-// const dev = argv.mode === "development" ? true : false;
-// const publicPath = dev ? "/" : "/";
-// dev ? devServerUrl() : null; //设置端口号
 const mode = dev ? "development" : "production";
+const publicPath = dev ? "/" : "/dist/";
+const root = path.resolve(__dirname, '../')
+
 const config = {
     mode: mode,
-    // output: {
-    //     filename: "[name].js",
-    //     chunkFilename: "[name].chunk.js",
-    //     publicPath: publicPath,
-    //     path: path.resolve(__dirname, 'dist')
-    // },
-    devtool: 'source-map',
-    optimization: {
-        runtimeChunk: {
-            name: 'mainfest'
-        },
-        splitChunks: {
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendors',
-                    chunks: 'initial',
-                    priority: 11,
-                }
-            }
-        }
+    output: {
+        filename: "[name].js",
+        chunkFilename: "[name].chunk.js",
+        publicPath: publicPath,
+        path: path.join(root, './dist')
     },
     resolve: {
         extensions: ['.js', '.ts', '.vue'],
-        alias: {
-            'Less': path.resolve(__dirname, 'src/less'),
-            'image': path.resolve(__dirname, 'src/image')
-        }
+        // alias: {
+        //     'Less': path.resolve(__dirname, 'src/less'),
+        //     'image': path.resolve(__dirname, 'src/image')
+        // }
     },
     module: {
         rules: [
@@ -85,12 +66,13 @@ const config = {
             },
             {
                 test: /\.js$/,
-                include: path.resolve(__dirname, 'src'),
+                // include: path.join(root, 'src'),
                 // loader: 'babel-loader',
+                // exclude: /node_modules/
             },
             {
                 test: /\.ts$/,
-                include: path.resolve(__dirname, 'src'),
+                // include: path.join(root, 'src'),
                 loader: 'ts-loader',
                 options: {
                     appendTsSuffixTo: [/\.vue$/]
@@ -111,13 +93,10 @@ const config = {
     ]
 }
 
-// if (!dev) {
-//     config.output.filename = "js/[name].js"
-//     config.output.chunkFilename = "js/[name].js"
-//     config.devtool = "none"
-//     config.plugins.push(...buildPlugins);
-// }
-
-
+if (!dev) {
+    config.output.filename = "js/[name].js"
+    config.output.chunkFilename = "js/[name].js"
+    config.devtool = "none"
+}
 
 module.exports = config
