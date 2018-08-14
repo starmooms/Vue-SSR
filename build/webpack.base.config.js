@@ -24,12 +24,13 @@ const config = {
         //     'image': path.resolve(__dirname, 'src/image')
         // }
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.css$/,
                 use: [
-                    miniCssExtractPlugin.loader,
+                    'vue-style-loader',
                     { loader: 'css-loader', options: { minimize: !dev, sourceMap: dev, importLoaders: 1 } },
                     'postcss-loader'
                 ]
@@ -37,7 +38,7 @@ const config = {
             {
                 test: /\.less$/,
                 use: [
-                    'style-loader',
+                    dev ? 'vue-style-loader' : miniCssExtractPlugin.loader,
                     { loader: 'css-loader', options: { minimize: !dev, sourceMap: dev, importLoaders: 3 } },
                     'postcss-loader',
                     { loader: 'less-loader', options: { sourceMap: dev } },
@@ -94,9 +95,13 @@ const config = {
 }
 
 if (!dev) {
-    config.output.filename = "js/[name].js"
-    config.output.chunkFilename = "js/[name].js"
-    config.devtool = "none"
+    config.output.filename = "js/[name]-[chunkhash:8].js"
+    config.output.chunkFilename = "js/[name]-[chunkhash:8].js"
+    // config.devtool = "none"
+
+
+
+    // config.push(...prodPlugins)
 }
 
 module.exports = config

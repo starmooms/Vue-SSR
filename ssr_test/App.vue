@@ -37,9 +37,24 @@
 export default {
     data() {
         return {
-            a: '532'
+            a: 'test'
         }
     }
+    // created() {
+    //     console.log('created 的钩子可以打印在后台前台')
+    // }
 }
 </script>
+
+
+<style lang="less">
+body {
+    padding: 20px;
+    background-color: #cecece1c;
+    ul {
+        padding: 20px;
+    }
+}
+</style>
+
 
