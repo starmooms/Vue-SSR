@@ -1,4 +1,6 @@
 import { createApp } from './app'
+import 'es6-promise/auto'
+import Vue from 'vue'
 
 const { app, router, store } = createApp();
 
@@ -7,9 +9,49 @@ if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__)
 }
 
-// app.$mount('#app');
+
+// 客户端预取订单或采用全局混合
+Vue.mixin({
+    // beforeMount() {
+    //     const { asyncData } = this.$options
+    //     if (asyncData) {
+    //         console.log('客户端数据预取-------')
+    //         this.dataPromise = asyncData({
+    //             store: this.$store,
+    //             route: this.$route
+    //         })
+    //     }
+    // },
+    // // 注意 keep-alive ！！！
+    // activated() {
+    //     const { asyncData } = this.$options
+    //     if (asyncData) {
+    //         console.log('客户端数据预取-------')
+    //         this.dataPromise = asyncData({
+    //             store: this.$store,
+    //             route: this.$route
+    //         })
+    //     }
+    // },
+    beforeRouteUpdate(to, from, next) {
+        const { asyncData } = this.$options
+        if (asyncData) {
+            console.log('beforeRouteUpdate 更新路由params 或 query时重新请求')
+            asyncData({
+                store: this.$store,
+                route: to
+            }).then(next).catch(next)
+        } else {
+            next()
+        }
+    }
+})
+
+
+
 
 router.onReady(() => {
+
     // 添加路由钩子函数，用于处理 asyncData.
     // 在初始路由 resolve 后执行，
     // 以便我们不会二次预取(double-fetch)已有的数据。
@@ -41,6 +83,8 @@ router.onReady(() => {
             next()
         }).catch(next)
     })
+
+
 
     app.$mount('#app')
 })

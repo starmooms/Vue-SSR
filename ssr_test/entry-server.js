@@ -11,7 +11,20 @@ export default context => {
     return new Promise((resolve, reject) => {
         const { app, router, store } = createApp()
 
-        router.push(context.url)
+
+        router.push(context.url)   //服务端传来的路由？？
+
+        // const { url } = context
+        // const { fullPath } = router.resolve(url).route
+        // console.log(url)
+        // console.log(fullPath)
+        // if (fullPath !== url) {
+        //     return reject({ url: fullPath })
+        // }
+
+        const meta = app.$meta()
+        context.meta = meta
+
 
         router.onReady(() => {
             // 获取router页面的vue组件

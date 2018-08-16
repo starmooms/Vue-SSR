@@ -1,6 +1,7 @@
 <template>
     <div>
         <p>{{ msg }}</p>
+        router
     </div>
 </template>
 

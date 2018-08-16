@@ -50,7 +50,10 @@ module.exports = (app, templatePath, cb) => {
 
     //main??
     //webpack-hot-middleware 热更新配置
-    clientConfig.entry.main = ['webpack-hot-middleware/client', clientConfig.entry.main]
+    // clientConfig.entry.main = ['webpack-hot-middleware/client', clientConfig.entry.main]
+    for (let key in clientConfig.entry) {
+        clientConfig.entry[key] = ['webpack-hot-middleware/client', clientConfig.entry[key]]
+    }
     clientConfig.output.filename = '[name].js'
     clientConfig.plugins.push(
         new webpack.HotModuleReplacementPlugin(),

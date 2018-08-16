@@ -19,6 +19,12 @@ export default {
         str() {
             return this.$store.state.nowString
         }
+    },
+    //异步的metainfo 使用函数return
+    metaInfo() {
+        return {
+            title: this.str
+        }
     }
 }
 </script>

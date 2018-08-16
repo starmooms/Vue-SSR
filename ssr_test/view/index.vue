@@ -19,6 +19,17 @@ export default {
         str() {
             return this.$store.state.nowString
         }
+    },
+    metaInfo: {
+        title: 'index',
+        meta: [
+            { charset: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+        ],
+        link: [
+            { rel: 'stylesheet', href: '/css/index.css' },
+            { rel: 'favicon', href: 'favicon.ico' }
+        ]
     }
 }
 </script>

@@ -30,7 +30,7 @@ const config = {
             {
                 test: /\.css$/,
                 use: [
-                    'vue-style-loader',
+                    'vue-style-loader', //vue-ssr渲染使用style-loader会报错？
                     { loader: 'css-loader', options: { minimize: !dev, sourceMap: dev, importLoaders: 1 } },
                     'postcss-loader'
                 ]
@@ -70,14 +70,6 @@ const config = {
                 // include: path.join(root, 'src'),
                 // loader: 'babel-loader',
                 // exclude: /node_modules/
-            },
-            {
-                test: /\.ts$/,
-                // include: path.join(root, 'src'),
-                loader: 'ts-loader',
-                options: {
-                    appendTsSuffixTo: [/\.vue$/]
-                }
             },
             {
                 test: /\.vue$/,

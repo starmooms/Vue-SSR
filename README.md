@@ -4,6 +4,22 @@
 2.预渲染
 
 
+### 服务端SSR
+
+#### 服务端预渲染
+服务端判断`router`组件内的`asyncData`函数数量执行，将返回数据传给`vuex` <br>
+客户端使用window.__INITIAL_STATE__引用数据
+``` js
+if (window.__INITIAL_STATE__) {
+    store.replaceState(window.__INITIAL_STATE__)
+}
+```
+
+* 进入页面时服务器会先进行ajax请求数据，然后被前端`vm.$mount(#app)`替换app，之后的页面和请求为客户端js都为渲染构成
+ps：可参考`view-source`的页面都有`data-server-rendered="true"`,被客户端渲染替换后消失。<br>或将`vm.$mount(#app)`改为`vm.$mount(#test)`，使客户端渲染失败，访问的页面都为服务端渲染的页面。
+
+---------------------------
+
 ### 预渲染
 
 使用`prerender-spa-plugin`生成静态页面，再用`vue-meta-info`管理头部title、meta等。(注意不能是`vue-meta`)

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ title }}</title>
+    <meta name="c"> {{{ meta.inject().title.text() }}} {{{ meta.inject().meta.text() }}} {{{ meta.inject().link.text() }}}
 </head>
 
 <body>
@@ -13,7 +13,7 @@
     <!--vue-ssr-outlet-->
 
 
-    <!-- https://github.com/youngwind/blog/issues/112 -->
+
 </body>
 
 </html>

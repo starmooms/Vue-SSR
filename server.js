@@ -8,7 +8,7 @@ const server = express()
 //vue-server-renderer    dev和prod引用文件设置
 //读取模板
 let renderer, readyPromise
-const template = require('fs').readFileSync('./template.html', 'UTF-8')
+const templatePath = './template.html'
 
 function createRenderer(bundle, options) {
     return vueServerRender.createBundleRenderer(bundle, Object.assign(options, {
@@ -19,7 +19,7 @@ function createRenderer(bundle, options) {
 if (dev) {
     readyPromise = require('./build/setup-dev-server')(
         server,
-        './template.html',
+        templatePath,
         (bundle, options) => {
             renderer = createRenderer(bundle, options)
         }
@@ -28,19 +28,12 @@ if (dev) {
     const bundle = require('./dist/vue-ssr-server-bundle.json')
     const clientManifest = require('./dist/vue-ssr-client-manifest.json')
     renderer = createRenderer(bundle, {
-        template,
+        template: require('fs').readFileSync(templatePath, 'UTF-8'),
         clientManifest
     })
 }
 
 
-// let c = historyBack({
-//     index: '/',
-//     rewrites: [
-//         { from: /^\/\/.*$/, to: '/' }
-//     ]
-// })
-// server.use(c)
 
 //设置静态文件目录
 const serve = (path, cache) => express.static(path, {
@@ -61,7 +54,7 @@ server.use('/api', apiRouter)
 
 function render(req, res) {
 
-    const context = { title: req.url, url: req.url }
+    const context = { url: req.url }
     renderer.renderToString(context, (err, html) => {
         if (err) {
             if (err.code === 404) {
@@ -75,8 +68,9 @@ function render(req, res) {
     })
 }
 
+//设置页面路由  2个use？？
 const mainRouter = express.Router()
-mainRouter.get('/', dev ? (req, res) => {
+mainRouter.use('/', dev ? (req, res) => {
     readyPromise
         .then(() => {
             render(req, res)
@@ -85,7 +79,7 @@ mainRouter.get('/', dev ? (req, res) => {
             console.log(err)
         })
 } : render)
-server.use('/*', mainRouter)
+server.use('/', mainRouter)
 
 
 let port = process.env.PORT || 9000

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>{{ msg }}</p>
+        <router-link v-for="i in arr" :key="i" :to="'/item/'+i+''">{{ i }}</router-link>
         <p>{{ str }}</p>
     </div>
 </template>
@@ -10,24 +10,26 @@ export default {
     asyncData({ store, route }) {
         return store.dispatch('getString', route)
     },
+    data() {
+        return {
+            arr: [1, 2, 3, 4, 5, 6]
+        }
+    },
     computed: {
         str() {
             return this.$store.state.nowString
         }
     },
-    watch: {
-        str(o, n) {
-            console.log(n)
-        }
-    },
-    data() {
-        return {
-            msg: 'this is about'
-        }
-    },
     metaInfo: {
-        title: 'about'
+        title: 'item'
     }
 }
 </script>
 
+<style lang="less" scoped>
+a {
+    display: inline-block;
+    padding: 0 20px;
+    margin: 10px;
+}
+</style>

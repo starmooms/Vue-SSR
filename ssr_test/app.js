@@ -3,8 +3,9 @@ import App from './App.vue'
 import { createRouter } from './router'
 import { createStore } from './store'
 import { sync } from 'vuex-router-sync'   //将router的状态放入store中
+import Meta from 'vue-meta'
 
-
+Vue.use(Meta)
 
 export function createApp(context) {
   const router = createRouter(context)
@@ -22,3 +23,5 @@ export function createApp(context) {
 
   return { app, router, store }
 }
+
+// https://github.com/youngwind/blog/issues/112 

@@ -5,6 +5,7 @@ import about from './view/about.vue'
 import test from './view/test.vue'
 import product from './view/product.vue'
 import message from './view/message.vue'
+import item from './view/item.vue'
 
 
 Vue.use(VueRouter)
@@ -33,6 +34,10 @@ export function createRouter() {
                 path: '/message',
                 component: message,
             },
+            {
+                path: '/item/:id',
+                component: item
+            }
         ]
     })
 }

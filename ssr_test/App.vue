@@ -26,6 +26,11 @@
                     <span>test</span>
                 </router-link>
             </li>
+            <li class="nav-item">
+                <router-link class="nav-link" to="/item/1">
+                    <span>item</span>
+                </router-link>
+            </li>
         </ul>
         <keep-alive>
             <router-view></router-view>
@@ -39,6 +44,12 @@ export default {
         return {
             a: 'test'
         }
+    },
+    metaInfo: {
+        // if no subcomponents specify a metaInfo.title, this title will be used
+        title: 'index',
+        // all titles will be injected into this template
+        titleTemplate: '%s | VueMeat test'
     }
     // created() {
     //     console.log('created 的钩子可以打印在后台前台')
