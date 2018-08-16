@@ -1,5 +1,5 @@
 const merge = require('webpack-merge')
-const nodeExternals = require('webpack-node-externals')
+const nodeExternals = require('webpack-node-externals')   //webpack打包时不捆绑的模块（即忽略某些模块）
 const baseConfig = require('./webpack.base.config.js')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 const path = require('path')

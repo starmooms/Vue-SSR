@@ -1,8 +1,8 @@
 
 const fs = require('fs')
 const path = require('path')
-const chokidar = require('chokidar')
-const MFS = require('memory-fs')
+const chokidar = require('chokidar')   //用于监听文件变化
+const MFS = require('memory-fs')        //将流写入内存
 const webpack = require('webpack')
 const clientConfig = require('./webpack.client.config')
 const serverConfig = require('./webpack.server.config')

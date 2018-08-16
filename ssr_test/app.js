@@ -4,6 +4,7 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { sync } from 'vuex-router-sync'   //将router的状态放入store中
 import Meta from 'vue-meta'
+import './base.css'
 
 Vue.use(Meta)
 
